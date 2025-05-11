@@ -1,0 +1,3 @@
+class CMEndpoints:
+
+    foo = None
