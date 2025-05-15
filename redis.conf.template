@@ -1,0 +1,2 @@
+requirepass __PASSWORD__
+user __USERNAME__ on >__PASSWORD__ ~* +@all

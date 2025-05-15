@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+
+  tg-admin-bot:
+    container_name: tg-admin-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8030:8030"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+    restart: unless-stopped
+    depends_on:
+      - tg-admin-redis
+    networks:
+      - tg-admin-redis-net
+
+  tg-admin-redis:
+    container_name: tg-admin-redis
+    image: redis:7.0-alpine
+    command: [ "sh", "-c", "sed 's|__USERNAME__|$REDIS_USERNAME|g; s|__PASSWORD__|$REDIS_PASSWORD|g' /etc/redis/redis.conf.template > /etc/redis/redis.conf && redis-server /etc/redis/redis.conf" ]
+    environment:
+      REDIS_USERNAME: ${REDIS_USERNAME}
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis.conf.template:/etc/redis/redis.conf.template
+    networks:
+      - tg-admin-redis-net
+
+networks:
+  tg-admin-redis-net:
+    driver: bridge
