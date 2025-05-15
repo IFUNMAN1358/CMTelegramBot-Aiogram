@@ -35,3 +35,5 @@ class CMProperties:
 
     def get_cm_bot_x_api_key(self):
         return self.__CM_BOT_X_API_KEY
+
+cm_properties = CMProperties()

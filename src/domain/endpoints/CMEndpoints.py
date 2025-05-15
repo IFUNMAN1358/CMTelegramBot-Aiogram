@@ -43,3 +43,5 @@ class CMEndpoints:
 
     def DELETE_api_registration_key(self, key_id: str):
         return f"{self.__cm_properties.get_cm_host()}/api/registration-key/{key_id}"
+
+cm_endpoints = CMEndpoints()

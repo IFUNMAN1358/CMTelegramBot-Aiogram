@@ -1,6 +1,6 @@
 from aiogram.fsm.state import StatesGroup, State
 
 
-class FSMAuth(StatesGroup):
+class FSMLogin(StatesGroup):
     writing_username = State()
     writing_password = State()

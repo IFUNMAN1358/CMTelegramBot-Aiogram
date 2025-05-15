@@ -38,3 +38,5 @@ class BotProperties:
 
     def get_bot_local_port(self):
         return self.__BOT_LOCAL_PORT
+
+bot_properties = BotProperties()
