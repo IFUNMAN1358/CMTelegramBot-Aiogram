@@ -27,11 +27,10 @@ async def command_profile(message: Message):
     session = Session.from_dict(dict_session)
 
     await message.answer(
-        "*Данные вашей сессии*:\n\n"
-        f"*TelegramUserId*: {message.from_user.id}\n"
-        f"*Имя пользователя*: {session.get_username()}\n"
-        f"*Имя*: {session.get_first_name()}\n"
-        f"*Фамилия*: {session.get_last_name()}\n"
-        f"*Роли*: {session.get_user_roles()}",
-        parse_mode="Markdown"
+        "Данные вашей сессии:\n\n"
+        f"TelegramUserId:  {message.from_user.id}\n"
+        f"Имя пользователя:  {session.get_username()}\n"
+        f"Имя:  {session.get_first_name()}\n"
+        f"Фамилия:  {session.get_last_name()}\n"
+        f"Роли:  {session.get_user_roles()}"
     )
