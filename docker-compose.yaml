@@ -16,8 +16,10 @@ services:
       - .:/app
     restart: unless-stopped
     depends_on:
+      - tg-admin-ngrok
       - tg-admin-redis
     networks:
+      - tg-admin-ngrok-net
       - tg-admin-redis-net
 
   tg-admin-redis:
@@ -34,6 +36,19 @@ services:
     networks:
       - tg-admin-redis-net
 
+  tg-admin-ngrok:
+    container_name: tg-admin-ngrok
+    image: ngrok/ngrok
+    environment:
+      - NGROK_AUTHTOKEN=${NGROK_AUTHTOKEN}
+    command: http --domain=${NGROK_DOMAIN} tg-admin-bot:8030
+    ports:
+      - "4040:4040"
+    networks:
+      - tg-admin-ngrok-net
+
 networks:
+  tg-admin-ngrok-net:
+    driver: bridge
   tg-admin-redis-net:
     driver: bridge
